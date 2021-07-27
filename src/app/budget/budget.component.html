@@ -1,0 +1,54 @@
+<div class="container">
+     
+      <div class="row my-4">
+        <div class="col">
+          <div class="row my-3">
+            <input type="number" id="amount" placeholder="Enter amount..." [disabled]="button === 0" [(ngModel)]="income" class=" form-control w-50 col-6 mx-2"/>
+            <button class="btn btn-outline-success btn-sm col-2" [disabled]="button === 0"  (click)="addIncome()">Add income</button>
+          </div>
+          
+          <h5>Your Balance</h5>
+          <h1 id="balance" [class]=" incomeAmount <= (incomeBack * 20/100)  ? 'text-danger' : 'text-success' ">{{incomeAmount === 0 ? "#0.00" : incomeAmount | currency:'NGN':'symbol-narrow'}}</h1>
+          
+          <h3>Add new transaction</h3>
+          
+            <div class="form-control row my-2">
+              <div class="col">
+                <label for="text">Good</label>
+                <input type="text" id="text" placeholder="Good/Service name ..." [(ngModel)]="goodName" class="form-control w-50" />
+              </div>
+              <div class="col">
+                <label for="text">Price</label>
+                <input type="number" id="number" [(ngModel)]="goodPrice" placeholder="Enter Amount ..." class="form-control w-50" />
+
+              </div>
+              <button class="btn btn-outline-success btn-sm col-2 my-2 mx-2" (click)="addGood()">Add Good</button>
+            </div>
+        </div>
+
+
+        <div class="col form-control pos">
+          <h3>Transaction</h3>
+          <div class="container">
+            <div class="row">
+
+              <div class="col-12 bg-secondary text-light my-2">
+                <div class="row  py-2  justify-content-center align-items-center">
+                  <div class="col-2 block">S/N</div><div class="col-3">NAME</div><div class="col-4">PRICE</div>
+                </div>
+              </div>
+
+              <div class="col-12 bg-light text-dark my-1" *ngFor="let trans of transactionArr; let i=index">
+                <div class="row  py-1  justify-content-center align-items-center" >  
+                    <div class="col-2">1</div><div class="col-3">{{trans.good}}</div><div class="col-3">#{{trans.price}}</div><div class="col-1"><button class="btn btn-sm btn-outline-danger" (click)="deleteTrans(i)">&times;</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="float text-secondary">
+            Total <span>{{total === 0 ? "#0.00" : total | currency:'NGN':'symbol-narrow'}}</span>
+          </div>  
+        </div>
+      </div>
+    </div>
